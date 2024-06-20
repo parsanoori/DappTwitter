@@ -1,65 +1,73 @@
+// Function to check if the wallet is connected and the contract object is created
 function assertReqs() {
+    // Check if the account is connected
     if (window.account == undefined){
+        // Alert the user to connect their wallet if it's not connected
         alert('Please connect your wallet first!')
         return false;
     }
+    // Check if the contract object is created
     if (window.contract == undefined){
+        // Alert the user if the contract object is not created
         alert('Contract object is not created. Something is wrong!')
         return false;
     }
+    // Return true if both checks pass
     return true;
 }
+
+// Function to send a tweet
 async function sendTweet() {
+    // Check the requirements before proceeding
     if (!assertReqs()) return;
+    // Get the tweet text from the input field
     const tweetText = document.getElementById('tweetText').value;
+    // Call the send_tweet method from the contract
     await window.contract.methods.send_tweet(tweetText).send({from: window.account});
+    // Alert the user that the tweet was sent
     alert('Tweet sent!')
 }
 
-async function likeTweet() {
-    if (!assertReqs()) return;
-    const tweetId = document.getElementById('likeTweetId').value;
-    await window.contract.methods.like_tweet(tweetId).send({from: window.account});
-    alert('Tweet liked!')
-}
 
-async function getTweet() {
-    if (!assertReqs()) return;
-    const tweetId = document.getElementById('getTweetId').value;
-    console.log('tweetId: ', tweetId)
-    try {
-        const tweet = await window.contract.methods.get_tweet(tweetId).call();
-        console.log(tweet)
-        const text = tweet[0];
-        const likes = tweet[1].toString();
-        const owner = tweet[2];
-        const id = tweet[3].toString();
-        const isLocked = tweet[4].toString();
-        // console log the consts
-        console.log('text: ', text)
-        console.log('likes: ', likes)
-        console.log('owner: ', owner)
-        console.log('id: ', id)
-        console.log('isLocked: ', isLocked)
-        // display them on the page
-        document.getElementById('getTweetText').innerText = text;
-        document.getElementById('getTweetLikes').innerText = likes;
-        document.getElementById('getTweetOwner').innerText = owner;
-        document.getElementById('retrieveTweetId').innerText = id;
-    } catch (error) {
-        alert(error);
-        return;
+// Function to check if the wallet is connected and the contract object is created
+function assertReqs() {
+    // Check if the account is connected
+    if (window.account == undefined){
+        // Alert the user to connect their wallet if it's not connected
+        alert('Please connect your wallet first!')
+        return false;
     }
+    // Check if the contract object is created
+    if (window.contract == undefined){
+        // Alert the user if the contract object is not created
+        alert('Contract object is not created. Something is wrong!')
+        return false;
+    }
+    // Return true if both checks pass
+    return true;
 }
 
-async function lockTweet() {
+// Function to send a tweet
+async function sendTweet() {
+    // Check the requirements before proceeding
     if (!assertReqs()) return;
-    const tweetId = document.getElementById('lockTweetId').value;
-    await window.contract.methods.lock_tweet(tweetId).send({from: window.account});
-    alert('Tweet locked!')
+    // Get the tweet text from the input field
+    const tweetText = document.getElementById('tweetText').value;
+    // Call the send_tweet method from the contract
+    await window.contract.methods.send_tweet(tweetText).send({from: window.account});
+    // Alert the user that the tweet was sent
+    alert('Tweet sent!')
 }
 
+
+// Assign the sendTweet function to the global window object, making it accessible from anywhere in the application
 window.sendTweet = sendTweet;
+
+// Assign the likeTweet function to the global window object, making it accessible from anywhere in the application
 window.likeTweet = likeTweet;
+
+// Assign the getTweet function to the global window object, making it accessible from anywhere in the application
 window.getTweet = getTweet;
+
+// Assign the lockTweet function to the global window object, making it accessible from anywhere in the application
 window.lockTweet = lockTweet;
