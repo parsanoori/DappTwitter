@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Twitter DApp</title>
+    <script type="module" src="main.js"></script>
+</head>
+<body>
+    <h1>Twitter DApp</h1>
+    <div>
+        <h2>Send Tweet</h2>
+        <input type="text" id="tweetText" placeholder="Enter your tweet">
+        <button onclick="sendTweet()">Send Tweet</button>
+    </div>
+    <div>
+        <h2>Like Tweet</h2>
+        <input type="number" id="likeTweetId" placeholder="Enter tweet ID">
+        <button onclick="likeTweet()">Like Tweet</button>
+    </div>
+    <div>
+        <h2>Get Tweet</h2>
+        <input type="number" id="getTweetId" placeholder="Enter tweet ID">
+        <button onclick="getTweet()">Get Tweet</button>
+        <div>
+        <h3>Tweet ID:</h3>
+        <h4 id="retrieveTweetId"></h4>
+        <h3>Text:</h2>
+        <p id="getTweetText"></p>
+        <h3>Tweet owner:</h3>
+        <h4 id="getTweetOwner"></h4>
+        <h3>Likes:</h3>
+        <h4 id="getTweetLikes"></h4>
+        </div>
+    </div>
+    <div>
+        <h2>Lock Tweet</h2>
+        <input type="number" id="lockTweetId" placeholder="Enter tweet ID">
+        <button onclick="lockTweet()">Lock Tweet</button>
+    </div>
+    <script type="module" src="actions.js"></script>
+</body>
+</html>
